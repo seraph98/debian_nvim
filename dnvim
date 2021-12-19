@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#!/bin/bash
+a=`uname  -a`
+D="Darwin"
+
+function check_dockerd {
+	if [[ $a =~ $D ]]; then
+		if [[ -z $(launchctl list | grep com.docker.docker) ]]; then
+			# need to start docker in mac
+			open /Applications/Docker.app
+			echo "wating for starting docker"
+			sleep 10
+		fi
+	else
+		if [ -z $(pidof dockerd) ]; then
+			# need to start docker deamon in other nix sys
+			dockerd	
+			echo "wating for starting docker"
+			sleep 10
+		fi
+	fi
+}
+
+check_dockerd
+docker start debian_nvim
+docker exec -it debian_nvim /usr/bin/zsh
