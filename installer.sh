@@ -114,6 +114,6 @@ function check_dockerd {
 
 if validate_or_install_docker; then
 	check_dockerd
- 	docker run -it --name debian_nvim --hostname dnvim seraph98/debian_nvim /usr/bin/zsh
+ 	docker run -it --security-opt=seccomp:unconfined --name debian_nvim --hostname dnvim seraph98/debian_nvim /usr/bin/zsh
 	cp ./dnvim /usr/local/bin
 fi
