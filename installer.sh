@@ -69,7 +69,7 @@ function install_in_ubuntu {
 
 
 function validate_or_install_docker {
-	if [ ! -e $(which docker) ]; then
+	if [ -e $(which docker) ]; then
 		#centos os check
 		FILE_EXE=/etc/redhat-release
 		if [ -f "$FILE_EXE" ];then
